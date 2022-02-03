@@ -61,3 +61,15 @@ def update_machine_details(sl_id: int, update_param: schema.UpdateMachine, db: S
         raise HTTPException(status_code=404, detail=f"No record found to update")
 
     return crud.update_machine_details(db=db, details=update_param, sl_id=sl_id)
+
+@app.get('/machine-id')
+def get_machine_by_id(sl_id: int, db: Session = Depends(get_db)):
+    details = crud.get_machine_by_id(db=db, sl_id=sl_id)
+    if not details:
+        raise HTTPException(status_code=404, detail=f"No record found to delete")
+
+    try:
+        crud.get_machine_by_id(db=db, sl_id=sl_id)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Unable to get Machine: {e}")
+    return crud.get_machine_by_id(db=db, sl_id=sl_id)
