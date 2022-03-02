@@ -19,4 +19,7 @@ class Machine(Base):
     machine_type = Column(Integer, index=True, nullable=False, default=0)
     machine_number = Column(Integer, index=True, nullable=False)
     machine_status = Column(Boolean, nullable=False, default=False)
+    machine_grade = Column(Boolean, nullable=False, default=False)
+    machine_price = Column(String, nullable=False, default="0")
+    
 
